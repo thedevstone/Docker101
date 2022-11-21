@@ -1,0 +1,27 @@
+version: "3.9"                            # The compose file version
+services:                                 # Services section
+  app-service:                            # Single service section
+  # Image creation
+    image: "rest-api_image"               # Name of the image to create
+    build:                                # How to build the image
+      context: rest-api-server            # Folder in which Dockerfile is contained
+      dockerfile: Dockerfile              # Can leave empty if filename is Dockerfile 
+    # Container Creation - Running  
+    container_name: "rest-api_container"  # Name of the container to create
+    restart: "unless-stopped"             # Can be always, on-failure, unless-stopped
+    networks:                             # Can define networks               
+      - my-network                        
+    ports:                                # Port mapping
+      - 5000:80
+    volumes:                              # Volume mapping
+      - ./rest-api-server/shared-volume:/shared-volume
+
+networks:
+  my-network:
+    name: my-network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "171.18.0.0/16"
+          gateway: "171.18.0.1"

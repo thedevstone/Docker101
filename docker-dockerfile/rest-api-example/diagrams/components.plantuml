@@ -1,0 +1,29 @@
+@startuml Components
+
+' Create the component + interface for REST API
+cloud "Remote Server" as RemoteServer {
+    package Application {
+        [Rest Api Service] as ApiService
+        interface HTTP as ApiServiceInterface
+        ApiServiceInterface - ApiService
+
+        [Rest Api Model] as ApiModel
+        ApiService *-- ApiModel 
+    }
+}
+
+' Create the component for HTTP client
+[Client HTTP] as Client
+Client ..> ApiServiceInterface: use 
+
+
+skinparam component {
+    backgroundColor PaleGoldenRod
+}
+skinparam package {
+    backgroundColor white
+}
+skinparam cloud {
+    backgroundColor lightblue
+}
+@enduml

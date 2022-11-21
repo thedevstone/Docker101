@@ -1,0 +1,15 @@
+@startuml Model
+
+hide members
+class University
+class Course
+class Person
+
+University "1" *-- "0-N" Course
+Course "1" *-- "0-N" Person
+
+
+skinparam class {
+    BackgroundColor LightBlue
+}
+@enduml
